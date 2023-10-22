@@ -1,0 +1,51 @@
+#pano {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#iframe {
+  background-color: #444;
+  position: relative;
+  text-align: center;
+  cursor: pointer;
+}
+
+iframe,
+#iframe {
+  width: 3000px;
+  height: 1500px;
+  border-radius: 20px;
+}
+
+#iframe:hover {
+  background-color: #383838;
+}
+
+.message {
+  text-align: center;
+  padding-top: 625px;
+  font-size: 150px;
+  font-family: Arial;
+  color: white;
+  animation-name: message;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
+  transition-duration: 0.2s;
+}
+
+@keyframes message {
+from {
+  opacity: 1;
+  scale: 0.95;
+}
+to {
+  opacity: 0.75;
+  scale: 1;
+}
+}
+
