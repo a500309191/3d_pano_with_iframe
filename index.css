@@ -6,25 +6,31 @@
   height: 100%;
 }
 
-#iframe {
+.iframe {
   background-color: #444;
   position: relative;
   text-align: center;
   cursor: pointer;
 }
 
-iframe,
-#iframe {
+.content,
+.iframe {
   width: 3000px;
   height: 1500px;
   border-radius: 20px;
 }
 
-#iframe:hover {
+.iframe:hover {
   background-color: #383838;
 }
 
-.message {
+
+.hidden {
+  display: none;
+}
+
+.message-start,
+.message-continue {
   text-align: center;
   padding-top: 625px;
   font-size: 150px;
@@ -36,6 +42,14 @@ iframe,
   animation-timing-function: ease-in-out;
   animation-direction: alternate;
   transition-duration: 0.2s;
+}
+
+.message-hiding {
+  font-size: 150px;
+  position: relative;
+  top: -900px;
+  font-family: Arial;
+  color: white;
 }
 
 @keyframes message {

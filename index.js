@@ -25,8 +25,9 @@ const scene = viewer.createScene({
 
 scene.switchTo()
 
+
 const container = scene.hotspotContainer()
-const iframe = document.querySelector("#iframe")
+const iframe = document.querySelector(".iframe")
 
 container.createHotspot(
   iframe,
@@ -34,12 +35,54 @@ container.createHotspot(
   { perspective: { radius: 1750, extraTransforms: "rotateX(4deg)" }}
 )
 
-const src = "https://www.youtube.com/embed/k-ZXEDMEaew"
-const content = `<iframe src="${src}" frameborder="0" allowfullscreen></iframe>`
 
-function loadContent() {
-  console.log("content loaded")
-  iframe.innerHTML = content
+const content = document.querySelector(".content")
+const messageStart = document.querySelector(".message-start")
+const messageContinue = document.querySelector(".message-continue")
+const messageHiding = document.querySelector(".message-hiding")
+
+let isContentVisible = false
+let hideTimeout
+var total = 15
+
+function toggleContent() {
+  if (messageStart.classList.contains("hidden")) {
+    messageContinue.classList.toggle("hidden")
+  }
+  isContentVisible = true
+  messageStart.classList.add("hidden")
+  content.classList.toggle("hidden")
 }
 
-iframe.addEventListener("click", loadContent)
+function hideContent() {
+  if (isContentVisible) {
+    hideTimeout = setTimeout(() => {
+      messageHiding.classList.toggle("hidden")
+      messageContinue.classList.toggle("hidden")
+      content.classList.toggle("hidden")
+      isContentVisible = false
+    }, 1500)
+
+    messageHiding.classList.toggle("hidden")
+
+    var sec = 15
+    var countDown = setInterval(function() {
+      sec--
+      messageHiding.innerHTML = `ПАУЗА ЧЕРЕЗ: ${sec}`
+      if (sec === 0) { clearInterval(countDown) }
+    }, 100)
+
+  }
+}
+
+function unideContent() {
+  clearTimeout(hideTimeout)
+  if (!messageHiding.classList.contains("hidden")) {
+    messageHiding.classList.toggle("hidden")
+  }
+}
+
+
+iframe.addEventListener("click", toggleContent)
+iframe.addEventListener("mouseleave", hideContent)
+iframe.addEventListener("mouseover", unideContent)
